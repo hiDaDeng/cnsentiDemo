@@ -1,0 +1,4 @@
+cnsenti==0.0.6
+jieba==0.42.1
+pandas==1.2.3
+streamlit==0.80.0
