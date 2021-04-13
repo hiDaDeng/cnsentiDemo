@@ -46,7 +46,7 @@ def gen_wordcloud(wordfreqs):
     from streamlit_echarts import st_pyecharts
     b = (
         WordCloud()
-        .add(series_name='WordCloud', data_pair=wordfreqs, word_size_range=[20, 100])
+        .add(series_name='WordCloud', data_pair=wordfreqs, word_size_range=[6, 100])
         .set_global_opts(
         title_opts=opts.TitleOpts(
             title="",
