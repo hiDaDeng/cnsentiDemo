@@ -36,7 +36,7 @@ def wordfreqs_count(uploaded_file='cnsenti_example.csv'):
         for word in wordset:
             wordfreqs.setdefault(word, 0)
             wordfreqs[word] = wordfreqs[word] + words.count(word)
-    res = [(k, v) for k,v in wordfreqs.items() if v>1]
+    res = [(k, v) for k,v in wordfreqs.items() if v>1 and len(k)>1]
     return res
 
 
