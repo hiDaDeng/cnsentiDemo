@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from cnsenti import Emotion, Sentiment
+import jieba
+import re
 
 st.title("cnsenti App")
 
@@ -22,20 +24,17 @@ st.markdown("""
 
 @st.cache(suppress_st_warning=True)
 def wordfreqs_count(uploaded_file='cnsenti_example.csv'):
-    import jieba
     df = pd.read_csv(uploaded_file)
     df.drop_duplicates(inplace=True)
     df.dropna(inplace=True)
-    #bar = st.progress(0)
+    text = ''.join(re.findall('[\u4e00-\u9fa5]+', ''.join(df['text'])))
     wordfreqs = dict()
     #for idx, text in enumerate(df['text']):
-    for text in df['text']:
-        #bar.progress(idx + 1)
-        words = jieba.lcut(text)
-        wordset = set(words)
-        for word in wordset:
-            wordfreqs.setdefault(word, 0)
-            wordfreqs[word] = wordfreqs[word] + words.count(word)
+    words = jieba.lcut(text)
+    wordset = set(words)
+    for word in wordset:
+        wordfreqs.setdefault(word, 0)
+        wordfreqs[word] = wordfreqs[word] + words.count(word)
     res = [(k, v) for k,v in wordfreqs.items() if v>1 and len(k)>1]
     return res
 
@@ -46,7 +45,7 @@ def gen_wordcloud(wordfreqs):
     from streamlit_echarts import st_pyecharts
     b = (
         WordCloud()
-        .add(series_name='WordCloud', data_pair=wordfreqs, word_size_range=[6, 100])
+        .add(series_name='WordCloud', data_pair=wordfreqs, word_size_range=[6, 66])
         .set_global_opts(
         title_opts=opts.TitleOpts(
             title="",
@@ -116,16 +115,3 @@ st.markdown("""
 st.image('大邓和他的Python.png')
 #import streamlit.components.v1 as components
 #components.iframe('https://github.com/thunderhit/cnsenti')
-
-
-
-
-
-
-
-
-
-
-
-
-
