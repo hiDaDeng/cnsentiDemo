@@ -26,10 +26,11 @@ def wordfreqs_count(uploaded_file='cnsenti_example.csv'):
     df = pd.read_csv(uploaded_file)
     df.drop_duplicates(inplace=True)
     df.dropna(inplace=True)
-    bar = st.progress(0)
+    #bar = st.progress(0)
     wordfreqs = dict()
-    for idx, text in enumerate(df['text']):
-        bar.progress(idx + 1)
+    #for idx, text in enumerate(df['text']):
+    for text in df['text']:
+        #bar.progress(idx + 1)
         words = jieba.lcut(text)
         wordset = set(words)
         for word in wordset:
@@ -109,7 +110,6 @@ st.markdown("""
 - [**B站:大邓和他的python**](https://space.bilibili.com/122592901/channel/detail?cid=66008)
 - [**github: DaDeng**](https://github.com/thunderhit)
 - **公众号：大邓和他的python**
-
 
 """)
 
