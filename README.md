@@ -8,6 +8,7 @@
 
 
 [**网址**](https://cnsenti.herokuapp.com/)
+![](效果图.png)
 
 [**使用教程** ](https://www.bilibili.com/video/bv17V411H7sZ)
 
